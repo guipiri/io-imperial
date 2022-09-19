@@ -1,5 +1,11 @@
+import Header from "./components/Header.js";
+
 function App() {
-	return <div>ola</div>;
+	return (
+		<>
+			<Header />
+		</>
+	);
 }
 
 export default App;
