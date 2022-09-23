@@ -1,7 +1,8 @@
-.coteiner {
+.conteiner {
     display: flex;
     padding: 20px;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -14,17 +15,18 @@ input::-webkit-inner-spin-button {
 .inputCep {
     border-radius: 6.5em;
     background-color: rgb(26, 33, 42);
-    width: 100%;
     color: #ffffff;
     line-height: 2.5em;
     padding-top: 0px;
     padding-right: 1.25em;
     padding-bottom: 0px;
     padding-left: 1.25em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    margin-left: .5em;
     transition: border-color .9s ease 0s, border-radius .1s ease-in-out;
     border: 1.2px solid #353c44;
-    appearance: none;
-    text-transform: uppercase
+    /* width: 300px; */
 }
 
 .inputCep:focus {
@@ -33,20 +35,28 @@ input::-webkit-inner-spin-button {
 }
 
 .form {
-    width: 100%;
     max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    margin: 10px 0 10px 0;
 }
 
-.conteiner {
+.conteinerInput {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content:space-around;
     width: 100%;
-    max-width: 800px;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
+
+label {
+    margin-right: .3em;
+    margin-bottom: .5em;
+    margin-left: .5em;
+}
+
+.pequeno {
+    width: 40px;
+}
+
