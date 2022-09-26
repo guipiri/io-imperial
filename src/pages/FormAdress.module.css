@@ -18,7 +18,7 @@ input::-webkit-inner-spin-button {
     color: #ffffff;
     line-height: 2.5em;
     padding-top: 0px;
-    padding-right: 1.25em;
+    /* padding-right: 1.25em; */
     padding-bottom: 0px;
     padding-left: 1.25em;
     margin-top: .5em;
@@ -26,10 +26,15 @@ input::-webkit-inner-spin-button {
     margin-left: .5em;
     transition: border-color .9s ease 0s, border-radius .1s ease-in-out;
     border: 1.2px solid #353c44;
-    /* width: 300px; */
+    width: -webkit-fill-available;
 }
 
 .inputCep:focus {
+    border: 1.2px solid #14ca4f;
+    outline: auto 0;
+}
+
+.inputCep:hover {
     border: 1.2px solid #14ca4f;
     outline: auto 0;
 }
@@ -55,8 +60,16 @@ label {
     margin-bottom: .5em;
     margin-left: .5em;
 }
-
-.pequeno {
-    width: 40px;
+p{
+    margin-right: .3em;
+    margin-bottom: .5em;
+    margin-left: .5em;
 }
 
+.button{
+    cursor: pointer;
+}
+
+.pequeno {
+    width: 50px;
+}
