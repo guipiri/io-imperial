@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import styles from "./FormAdress.module.css";
-import ReadSheet from "../routes/ReadSheet";
 import WriteSheet from "../routes/WriteSheet";
 
 
@@ -31,9 +30,9 @@ function FormAdress() {
 	async function handleSubmitAdress(e) {
 		e.preventDefault()
 
-		var data = await WriteSheet("https://sheetdb.io/api/v1/8dis6u0zthz73", { "fisrtName": "nome" })
-		console.log(data)
+		await WriteSheet('https://sheetdb.io/api/v1/8dis6u0zthz73', adress)
 		// guardar valores na planilha, incluindo o boneco escolhido
+
 		//redirecionar para a página de agradecimento
 
 	}
@@ -52,6 +51,7 @@ function FormAdress() {
 						placeholder="012345678"
 						className={`${styles.inputCep} ${styles.CEP}`}
 						onChange={handleOnChange}
+						required
 					/>
 				</div>
 			</form>
@@ -68,7 +68,8 @@ function FormAdress() {
 										defaultValue={adress.logradouro}
 										className={styles.inputCep}
 										id="logradouro"
-										name="logradouro" />
+										name="logradouro"
+										required />
 								</td>
 								<td>
 									<label htmlFor="numero">Nº:</label>
@@ -78,7 +79,8 @@ function FormAdress() {
 										placeholder="1234"
 										className={`${styles.inputCep} ${styles.pequeno}`}
 										id="numero"
-										name="numero" />
+										name="numero"
+										required />
 								</td>
 							</tr>
 							<tr>
@@ -91,7 +93,8 @@ function FormAdress() {
 										defaultValue={adress.bairro}
 										className={styles.inputCep}
 										id="bairro"
-										name="bairro" />
+										name="bairro"
+										required />
 								</td>
 							</tr>
 							<tr>
@@ -103,7 +106,8 @@ function FormAdress() {
 										defaultValue={adress.localidade}
 										className={styles.inputCep}
 										id="cidade"
-										name="localidade" />
+										name="localidade"
+										required />
 								</td>
 								<td className={styles.pequeno}>
 									<label htmlFor="uf">UF:</label>
@@ -113,7 +117,8 @@ function FormAdress() {
 										defaultValue={adress.uf}
 										className={`${styles.inputCep} ${styles.pequeno}`}
 										id="uf"
-										name="uf" />
+										name="uf"
+										required />
 								</td>
 							</tr>
 							<tr>
@@ -135,7 +140,9 @@ function FormAdress() {
 										onChange={handleChange}
 										id="boneco1"
 										value="boneco1"
-										name="boneco" />
+										name="boneco"
+										required />
+
 									<label htmlFor="boneco1">Boneco 1</label>
 									<br />
 									<input
@@ -152,7 +159,7 @@ function FormAdress() {
 								<td colSpan="2">
 									<input
 										type="submit"
-										className={styles.inputCep}></input>
+										className={`${styles.inputCep} ${styles.button}`}></input>
 								</td>
 							</tr>
 						</tbody>
