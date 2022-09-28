@@ -73,3 +73,7 @@ p{
 .pequeno {
     width: 50px;
 }
+
+.cepDiv {
+    width: min-content;
+}

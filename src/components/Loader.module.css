@@ -1,0 +1,19 @@
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate {
+    -webkit-animation-name:             rotate; 
+    -webkit-animation-duration:         1.3s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+    position: fixed;
+    bottom: 50vh;
+    right: 47vw;
+}
