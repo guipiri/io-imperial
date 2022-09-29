@@ -3,6 +3,7 @@ import img from "../imgs/jogadores";
 import styles from "./Home.module.css";
 import InputCodigo from "../components/InputCodigo";
 import Loader from "../components/Loader";
+import Alert from "../components/Alert";
 
 function Header() {
 	return (
@@ -31,6 +32,7 @@ function Header() {
 				</div>
 			</div>
 			<Loader on={false} />
+			<Alert msg="Homee" />
 		</>
 	);
 }

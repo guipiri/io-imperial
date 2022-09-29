@@ -3,11 +3,13 @@ import { useState } from "react";
 import styles from "./FormAdress.module.css";
 import WriteSheet from "../routes/WriteSheet";
 import Loader from "../components/Loader";
+import Alert from "../components/Alert";
 
 function FormAdress() {
 	const [cep, setCep] = useState("");
 	const [adress, setAdress] = useState("");
 	const [loaderOn, setLoaderOn] = useState(false);
+	const [alertConfig, setAlertConfig] = useState({});
 
 	function handleOnChange(e) {
 		setCep(e.target.value);
@@ -26,7 +28,13 @@ function FormAdress() {
 			.then((data) => {
 				if (data.erro) {
 					setLoaderOn(false);
-					alert("Digite um CEP válido!");
+					setAlertConfig({
+						on: true,
+						tit: "CEP Inválido!",
+						msg: "Digite um CEP válido",
+						type: "fail",
+					});
+					// alert("Digite um CEP válido!");
 					setCep("");
 					setAdress("");
 				} else {
@@ -35,7 +43,12 @@ function FormAdress() {
 				}
 			})
 			.catch((err) => {
-				alert("Digite um CEP válido!");
+				setAlertConfig({
+					on: true,
+					tit: "CEP Inválido!",
+					msg: "Digite um CEP válido",
+					type: "fail",
+				});
 				setCep("");
 				setLoaderOn(false);
 			});
@@ -50,8 +63,13 @@ function FormAdress() {
 			adress
 		).then(() => {
 			setLoaderOn(false);
-			alert("Seu endereço foi registrado com sucesso");
-			window.location.pathname = "/";
+			setAlertConfig({
+				on: true,
+				tit: "Perfeito!",
+				msg: "Seu endereço foi registrado com sucesso. Seu boneco chegará em breve!",
+				type: "success",
+			});
+			// window.location.pathname = "/";
 		});
 	}
 
@@ -202,6 +220,14 @@ function FormAdress() {
 				)}
 			</div>
 			<Loader on={loaderOn} />
+			{alertConfig.on && (
+				<Alert
+					tit={alertConfig.tit}
+					msg={alertConfig.msg}
+					type={alertConfig.type}
+					ok={() => setAlertConfig({ ...alertConfig, on: false })}
+				/>
+			)}
 		</>
 	);
 }

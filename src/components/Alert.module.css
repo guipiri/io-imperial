@@ -1,0 +1,40 @@
+.divAlert {
+    padding: 1em;
+    width: 70%;
+    max-width: 350px;
+    border-radius: 10px;
+    border: 1px solid #353c44;
+
+}
+
+h2, p, button{
+    margin: 10px 10px 0 10px;
+    padding: 0;
+}
+
+.conteiner {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    right:0;
+    bottom: 60vh;
+}
+
+.button {
+    border-radius: 6.5em;
+    background-color: rgb(35, 42, 51);
+    color: #ffffff;
+    line-height: 2.5em;
+    margin-top: 15px;
+    transition: border-color .9s ease 0s, border-radius .1s ease-in-out;
+    border: 1.2px solid #353c44;
+    width: -webkit-fill-available;
+    cursor: pointer;
+}
+
+.button:hover {
+    border: 1.2px solid white;
+}
+
+
