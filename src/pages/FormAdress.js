@@ -34,7 +34,6 @@ function FormAdress() {
 						msg: "Digite um CEP válido",
 						type: "fail",
 					});
-					// alert("Digite um CEP válido!");
 					setCep("");
 					setAdress("");
 				} else {
@@ -69,8 +68,12 @@ function FormAdress() {
 				msg: "Seu endereço foi registrado com sucesso. Seu boneco chegará em breve!",
 				type: "success",
 			});
-			// window.location.pathname = "/";
 		});
+	}
+
+	function okButton() {
+		setAlertConfig({ ...alertConfig, on: false })
+		window.location.pathname = "/";
 	}
 
 	return (
@@ -225,7 +228,7 @@ function FormAdress() {
 					tit={alertConfig.tit}
 					msg={alertConfig.msg}
 					type={alertConfig.type}
-					ok={() => setAlertConfig({ ...alertConfig, on: false })}
+					ok={okButton}
 				/>
 			)}
 		</>
