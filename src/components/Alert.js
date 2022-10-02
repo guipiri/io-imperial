@@ -7,7 +7,7 @@ function Alert({ tit, msg, type, ok }) {
 				<div className={styles.divAlert}>
 					<h2 className={type}>{tit}</h2>
 					<p>{msg}</p>
-					<button className={styles.button} onClick={ok}>
+					<button autoFocus className={styles.button} onClick={ok}>
 						OK
 					</button>
 				</div>

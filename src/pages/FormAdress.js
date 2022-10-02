@@ -4,6 +4,7 @@ import styles from "./FormAdress.module.css";
 import WriteSheet from "../routes/WriteSheet";
 import Loader from "../components/Loader";
 import Alert from "../components/Alert";
+import Header from "../components/Header";
 
 function FormAdress() {
 	const [cep, setCep] = useState("");
@@ -19,11 +20,11 @@ function FormAdress() {
 		setAdress({ ...adress, [e.target.name]: e.target.value });
 	}
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
 		setLoaderOn(true);
 		setAdress("");
-		fetch(`https://viacep.com.br/ws/${cep}/json/`)
+		await fetch(`https://viacep.com.br/ws/${cep}/json/`)
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.erro) {
@@ -57,6 +58,30 @@ function FormAdress() {
 		e.preventDefault();
 		setLoaderOn(true);
 
+		// let date = new Date();
+		// const day = date.getDate();
+		// const month = date.getMonth() + 1;
+		// const year = date.getFullYear();
+		// date = day + "/" + month + "/" + year;
+
+		// const values = [
+		// 	[
+		// 		"aiuhaiua",
+		// 		false,
+		// 		date,
+		// 		adress.cep,
+		// 		adress.logradouro,
+		// 		adress.numero,
+		// 		adress.bairro,
+		// 		adress.localidade,
+		// 		adress.uf,
+		// 		adress.complemento,
+		// 		adress.boneco,
+		// 	],
+		// ];
+
+		// updateRow(15, values);
+
 		await WriteSheet(
 			"https://sheetdb.io/api/v1/8dis6u0zthz73",
 			adress
@@ -72,12 +97,17 @@ function FormAdress() {
 	}
 
 	function okButton() {
-		setAlertConfig({ ...alertConfig, on: false })
-		window.location.pathname = "/";
+		setAlertConfig({ ...alertConfig, on: false });
+		if (alertConfig.type === "success") {
+			window.location.pathname = "/";
+		} else {
+			document.getElementById("CEP").focus();
+		}
 	}
 
 	return (
 		<>
+			<Header />
 			<div className={styles.conteiner}>
 				<form className={styles.form} onSubmit={handleSubmit}>
 					<div className={styles.cepDiv}>
@@ -91,6 +121,7 @@ function FormAdress() {
 							className={`${styles.inputCep} ${styles.CEP}`}
 							onChange={handleOnChange}
 							required
+							autoFocus
 						/>
 					</div>
 				</form>

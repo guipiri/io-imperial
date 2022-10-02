@@ -13,7 +13,12 @@
     -webkit-animation-duration:         1.3s; 
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function: linear;
-    position: fixed;
-    bottom: 50vh;
-    right: 45vw;
+}
+
+.ldsdualring {
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  position:absolute;
+  bottom: 60vh;
 }
