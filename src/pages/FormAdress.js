@@ -1,16 +1,20 @@
 import React from "react";
 import { useState } from "react";
 import styles from "./FormAdress.module.css";
-import WriteSheet from "../routes/WriteSheet";
+// import WriteSheet from "../routes/WriteSheet";
 import Loader from "../components/Loader";
 import Alert from "../components/Alert";
 import Header from "../components/Header";
+import { AuthContext } from "./CodeAuth";
+import axios from "axios";
 
 function FormAdress() {
 	const [cep, setCep] = useState("");
 	const [adress, setAdress] = useState("");
 	const [loaderOn, setLoaderOn] = useState(false);
 	const [alertConfig, setAlertConfig] = useState({});
+	const { authCode } = React.useContext(AuthContext);
+	console.log(authCode);
 
 	function handleOnChange(e) {
 		setCep(e.target.value);
@@ -58,34 +62,35 @@ function FormAdress() {
 		e.preventDefault();
 		setLoaderOn(true);
 
-		// let date = new Date();
-		// const day = date.getDate();
-		// const month = date.getMonth() + 1;
-		// const year = date.getFullYear();
-		// date = day + "/" + month + "/" + year;
+		let date = new Date();
+		const day = date.getDate();
+		const month = date.getMonth() + 1;
+		const year = date.getFullYear();
+		date = day + "/" + month + "/" + year;
 
-		// const values = [
-		// 	[
-		// 		"aiuhaiua",
-		// 		false,
-		// 		date,
-		// 		adress.cep,
-		// 		adress.logradouro,
-		// 		adress.numero,
-		// 		adress.bairro,
-		// 		adress.localidade,
-		// 		adress.uf,
-		// 		adress.complemento,
-		// 		adress.boneco,
-		// 	],
-		// ];
+		const values = [
+			[
+				authCode.codigo,
+				false,
+				date,
+				adress.cep,
+				adress.logradouro,
+				adress.numero,
+				adress.bairro,
+				adress.localidade,
+				adress.uf,
+				adress.complemento,
+				adress.boneco,
+			],
+		];
 
-		// updateRow(15, values);
-
-		await WriteSheet(
-			"https://sheetdb.io/api/v1/8dis6u0zthz73",
-			adress
-		).then(() => {
+		await axios({
+			method: "post",
+			url: `http://localhost:3001/updateRow/${authCode.row}`,
+			data: {
+				values,
+			},
+		}).then((res) => {
 			setLoaderOn(false);
 			setAlertConfig({
 				on: true,

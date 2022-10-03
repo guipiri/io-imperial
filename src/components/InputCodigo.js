@@ -4,12 +4,15 @@ import img from "../imgs/jogadores";
 import axios from "axios";
 import Loader from "../components/Loader";
 import Alert from "../components/Alert";
+import { AuthContext } from "../pages/CodeAuth";
 // import ReadSheet from "../routes/ReadSheet";
 
 function InputCodigo() {
 	const [codigo, setCodigo] = useState("");
 	const [loaderOn, setLoaderOn] = useState(false);
 	const [alertConfig, setAlertConfig] = useState({});
+	const [validCodeRow, setValidCodeRow] = useState("");
+	const { authCode, setAuthCode } = React.useContext(AuthContext);
 
 	useEffect(() => {
 		document.getElementById("inputCode").focus();
@@ -21,10 +24,12 @@ function InputCodigo() {
 		await axios({
 			method: "get",
 			url: `http://localhost:3001/validCode/${codigo}`,
-		}).then(function (response) {
-			const valid = response.data.valid;
-			if (valid) {
+		}).then((response) => {
+			const data = response.data;
+			if (data.valid) {
+				console.log(data);
 				setLoaderOn(false);
+				setValidCodeRow(data.i);
 				setAlertConfig({
 					on: true,
 					tit: "Código validado com sucesso!",
@@ -43,19 +48,11 @@ function InputCodigo() {
 		});
 	}
 
-	// async function getSheet() {
-	// 	const sheet = await ReadSheet(
-	// 		"https://sheetdb.io/api/v1/8dis6u0zthz73"
-	// 	);
-	// 	console.log(codigo, sheet);
-	// }
-
-	// getSheet();
-
 	function okButton() {
 		setAlertConfig({ ...alertConfig, on: false });
 		if (alertConfig.type === "success") {
-			window.location.pathname = "/form";
+			setAuthCode({ codigo, row: validCodeRow });
+			console.log(authCode);
 		} else {
 			document.getElementById("inputCode").focus();
 		}
