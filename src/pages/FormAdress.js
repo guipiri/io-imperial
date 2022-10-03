@@ -86,19 +86,30 @@ function FormAdress() {
 
 		await axios({
 			method: "post",
-			url: `http://localhost:3001/updateRow/${authCode.row}`,
+			url: `${process.env.REACT_APP_API_URL}/updateRow/${authCode.row}`,
 			data: {
 				values,
 			},
-		}).then((res) => {
-			setLoaderOn(false);
-			setAlertConfig({
-				on: true,
-				tit: "Perfeito!",
-				msg: "Seu endereço foi registrado com sucesso. Seu boneco chegará em breve!",
-				type: "success",
+		})
+			.then((res) => {
+				setLoaderOn(false);
+				setAlertConfig({
+					on: true,
+					tit: "Perfeito!",
+					msg: "Seu endereço foi registrado com sucesso. Seu boneco chegará em breve!",
+					type: "success",
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+				setLoaderOn(false);
+				setAlertConfig({
+					on: true,
+					tit: "Erro!",
+					msg: "Estamos tendo problemas!",
+					type: "fail",
+				});
 			});
-		});
 	}
 
 	function okButton() {

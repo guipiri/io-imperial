@@ -5,7 +5,6 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import Alert from "../components/Alert";
 import { AuthContext } from "../pages/CodeAuth";
-// import ReadSheet from "../routes/ReadSheet";
 
 function InputCodigo() {
 	const [codigo, setCodigo] = useState("");
@@ -23,29 +22,40 @@ function InputCodigo() {
 		e.preventDefault();
 		await axios({
 			method: "get",
-			url: `http://localhost:3001/validCode/${codigo}`,
-		}).then((response) => {
-			const data = response.data;
-			if (data.valid) {
-				console.log(data);
+			url: `${process.env.REACT_APP_API_URL}/validCode/${codigo}`,
+		})
+			.then((response) => {
+				const data = response.data;
+				if (data.valid) {
+					console.log(data);
+					setLoaderOn(false);
+					setValidCodeRow(data.i);
+					setAlertConfig({
+						on: true,
+						tit: "Código validado com sucesso!",
+						msg: "Você será redirecionado para cadastrar seu endereço de entrega do seu boneco!",
+						type: "success",
+					});
+				} else {
+					setLoaderOn(false);
+					setAlertConfig({
+						on: true,
+						tit: "Código inválido!",
+						msg: data.status,
+						type: "fail",
+					});
+				}
+			})
+			.catch((err) => {
 				setLoaderOn(false);
-				setValidCodeRow(data.i);
 				setAlertConfig({
 					on: true,
-					tit: "Código validado com sucesso!",
-					msg: "Você será redirecionado para cadastrar seu endereço de entrega do seu boneco!",
-					type: "success",
-				});
-			} else {
-				setLoaderOn(false);
-				setAlertConfig({
-					on: true,
-					tit: "Código inválido!",
-					msg: "Confira o código digitado e tente novamente!",
+					tit: "Erro!",
+					msg: "Estamos com problemas no servidor.",
 					type: "fail",
 				});
-			}
-		});
+				console.log(err);
+			});
 	}
 
 	function okButton() {
@@ -71,7 +81,7 @@ function InputCodigo() {
 								className={styles.inputCodigo}
 								placeholder="Digite seu código de resgate"
 								onChange={(e) => {
-									setCodigo(e.target.value);
+									setCodigo(e.target.value.toUpperCase());
 								}}
 							/>
 						</form>
