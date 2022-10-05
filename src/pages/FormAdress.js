@@ -126,18 +126,26 @@ function FormAdress() {
 			<div className={styles.conteiner}>
 				<form className={styles.form} onSubmit={handleSubmit}>
 					<div className={styles.cepDiv}>
-						<label htmlFor="CEP">Digite o CEP:</label>
-						<input
-							type="number"
-							id="CEP"
-							name="cep"
-							value={cep}
-							placeholder="012345678"
-							className={`${styles.inputCep} ${styles.CEP}`}
-							onChange={handleOnChange}
-							required
-							autoFocus
-						/>
+						<div>
+							<label htmlFor="CEP">Digite o CEP:</label>
+							<input
+								type="number"
+								id="CEP"
+								name="cep"
+								value={cep}
+								placeholder="012345678"
+								className={`${styles.inputCep} ${styles.CEP}`}
+								onChange={handleOnChange}
+								required
+								autoFocus
+							/>
+						</div>
+						{!adress && (
+							<input
+								type="submit"
+								className={`${styles.inputCep} ${styles.inputSubmit}`}
+							/>
+						)}
 					</div>
 				</form>
 				{adress && (

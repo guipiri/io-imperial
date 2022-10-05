@@ -47,6 +47,16 @@
     max-width: 800px;
 }
 
+.buttonSubmit {
+    margin-left: 16px;
+    max-width: 100px;
+}
+.buttonSubmit:hover{
+    cursor: pointer;
+    border: 1.2px solid #14ca4f;
+    outline: auto 0;
+}
+
 
 
 

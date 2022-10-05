@@ -58,7 +58,7 @@ input::-webkit-inner-spin-button {
 label {
     margin-right: .3em;
     margin-bottom: .5em;
-    margin-left: .5em;
+    margin-left: .8em;
 }
 
 .button{
@@ -70,5 +70,13 @@ label {
 }
 
 .cepDiv {
-    width: min-content;
+    /* width: min-content; */
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+}
+.inputSubmit {
+    padding: 0;
+    max-width: 100px;
+    cursor: pointer;
 }

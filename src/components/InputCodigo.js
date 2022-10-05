@@ -82,6 +82,10 @@ function InputCodigo() {
 									setCodigo(e.target.value.toUpperCase());
 								}}
 							/>
+							<input
+								type="submit"
+								className={`${styles.inputCodigo} ${styles.buttonSubmit}`}
+							/>
 						</form>
 					</div>
 					<img
