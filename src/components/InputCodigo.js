@@ -11,7 +11,7 @@ function InputCodigo() {
 	const [loaderOn, setLoaderOn] = useState(false);
 	const [alertConfig, setAlertConfig] = useState({});
 	const [validCodeRow, setValidCodeRow] = useState("");
-	const { authCode, setAuthCode } = React.useContext(AuthContext);
+	const { setAuthCode } = React.useContext(AuthContext);
 
 	useEffect(() => {
 		document.getElementById("inputCode").focus();
@@ -27,7 +27,6 @@ function InputCodigo() {
 			.then((response) => {
 				const data = response.data;
 				if (data.valid) {
-					console.log(data);
 					setLoaderOn(false);
 					setValidCodeRow(data.i);
 					setAlertConfig({
@@ -62,7 +61,6 @@ function InputCodigo() {
 		setAlertConfig({ ...alertConfig, on: false });
 		if (alertConfig.type === "success") {
 			setAuthCode({ codigo, row: validCodeRow });
-			console.log(authCode);
 		} else {
 			document.getElementById("inputCode").focus();
 		}

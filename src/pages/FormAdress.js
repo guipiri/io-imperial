@@ -14,7 +14,6 @@ function FormAdress() {
 	const [loaderOn, setLoaderOn] = useState(false);
 	const [alertConfig, setAlertConfig] = useState({});
 	const { authCode } = React.useContext(AuthContext);
-	console.log(authCode);
 
 	function handleOnChange(e) {
 		setCep(e.target.value);
