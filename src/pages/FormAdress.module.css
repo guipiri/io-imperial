@@ -58,7 +58,7 @@ input::-webkit-inner-spin-button {
 label {
     margin-right: .3em;
     margin-bottom: .5em;
-    margin-left: .8em;
+    margin-left: 1em;
 }
 
 .button{
@@ -80,3 +80,36 @@ label {
     max-width: 100px;
     cursor: pointer;
 }
+
+.conteinerBonecos {
+    display: flex;
+    /* width: 50%; */
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 1.2px solid #14ca4e00;
+    border-radius: 20px ;
+    margin: 5px;
+    transition: border-color .6s ease 0s;
+
+}
+
+.conteinerBonecos img {
+    width: 100%;
+    max-width: 160px;
+}
+
+.conteinerBonecos:hover {
+    border: 1.2px solid #14ca4f;
+    outline: auto 0;
+    cursor: pointer;
+}
+
+.divBonecos {
+    display: flex;
+}
+
+.greenBorder {
+    border: 1.2px solid #14ca4f;
+}
+

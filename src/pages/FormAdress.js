@@ -7,6 +7,7 @@ import Alert from "../components/Alert";
 import Header from "../components/Header";
 import { AuthContext } from "./CodeAuth";
 import axios from "axios";
+import skeleton from "../imgs/skeleton_knife.png"
 
 function FormAdress() {
 	const [cep, setCep] = useState("");
@@ -20,7 +21,17 @@ function FormAdress() {
 	}
 
 	function handleChange(e) {
-		setAdress({ ...adress, [e.target.name]: e.target.value });
+		setAdress({ ...adress, [e.target.name]: e.target.value || e.target.alt });
+		const bonecos = document.getElementsByClassName(styles.conteinerBonecos)
+		if (e.target.alt) {
+			if (e.target.alt === "boneco1") {
+				bonecos[0].classList.add(styles.greenBorder)
+				bonecos[1].classList.remove(styles.greenBorder)
+			} else if (e.target.alt === "boneco2") {
+				bonecos[1].classList.add(styles.greenBorder)
+				bonecos[0].classList.remove(styles.greenBorder)
+			}
+		}
 	}
 
 	async function handleSubmit(e) {
@@ -59,7 +70,19 @@ function FormAdress() {
 
 	async function handleSubmitAdress(e) {
 		e.preventDefault();
+
+		if (!adress.boneco) {
+			setAlertConfig({
+				on: true,
+				tit: "Erro!",
+				msg: "Escolha um boneco!",
+				type: "fail",
+			})
+			return false
+		}
+
 		setLoaderOn(true);
+
 
 		let date = new Date();
 		const day = date.getDate();
@@ -235,34 +258,36 @@ function FormAdress() {
 									</td>
 								</tr>
 								<tr>
-									<td>
-										<span>Escolha seu boneco:</span>
-										<br />
-										<input
-											type="radio"
-											onChange={handleChange}
-											id="boneco1"
-											value="boneco1"
-											name="boneco"
-											required
-										/>
-
-										<label htmlFor="boneco1">
-											Boneco 1
-										</label>
-										<br />
-										<input
-											type="radio"
-											onChange={handleChange}
-											value="boneco2"
-											id="boneco2"
-											name="boneco"
-										/>
-										<label htmlFor="boneco2">
-											Boneco 2
-										</label>
-									</td>
+									<td colSpan="3"><label>Escolha seu boneco:</label></td>
 								</tr>
+								<tr>
+									<td colSpan="3">
+										<div className={styles.divBonecos}>
+											<div className={styles.conteinerBonecos}>
+												<img src={skeleton}
+													onClick={handleChange}
+													alt="boneco1"
+													name="boneco"
+												/>
+												<span>
+													Boneco 1
+												</span>
+											</div>
+											<div className={styles.conteinerBonecos}>
+												<img src={skeleton}
+													onClick={handleChange}
+													alt="boneco2"
+													name="boneco"
+												/>
+												<span>
+													Boneco 2
+												</span>
+											</div>
+										</div>
+									</td>
+
+								</tr>
+
 								<tr>
 									<td colSpan="2">
 										<input

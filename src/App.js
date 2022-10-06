@@ -12,6 +12,7 @@ function App() {
 				<Route
 					path="/"
 					element={!authCode ? <Home /> : <FormAdress />}
+				// element={<FormAdress />}
 				/>
 			</Routes>
 		</Router>
