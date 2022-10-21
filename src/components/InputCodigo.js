@@ -10,7 +10,7 @@ function InputCodigo() {
 	const [codigo, setCodigo] = useState("");
 	const [loaderOn, setLoaderOn] = useState(false);
 	const [alertConfig, setAlertConfig] = useState({});
-	const [validCodeRow, setValidCodeRow] = useState("");
+	const [token, setToken] = useState("");
 	const { setAuthCode } = React.useContext(AuthContext);
 
 	useEffect(() => {
@@ -28,10 +28,10 @@ function InputCodigo() {
 				const data = response.data;
 				if (data.valid) {
 					setLoaderOn(false);
-					setValidCodeRow(data.i);
+					setToken({ token: data.token });
 					setAlertConfig({
 						on: true,
-						tit: "Código validado com sucesso!",
+						tit: data.status,
 						msg: "Você será redirecionado para cadastrar seu endereço de entrega do seu boneco!",
 						type: "success",
 					});
@@ -60,7 +60,7 @@ function InputCodigo() {
 	function okButton() {
 		setAlertConfig({ ...alertConfig, on: false });
 		if (alertConfig.type === "success") {
-			setAuthCode({ codigo, row: validCodeRow });
+			setAuthCode(token);
 		} else {
 			document.getElementById("inputCode").focus();
 		}
@@ -79,7 +79,7 @@ function InputCodigo() {
 								className={styles.inputCodigo}
 								placeholder="Digite seu código de resgate"
 								onChange={(e) => {
-									setCodigo(e.target.value.toUpperCase());
+									setCodigo(e.target.value);
 								}}
 							/>
 							<input
